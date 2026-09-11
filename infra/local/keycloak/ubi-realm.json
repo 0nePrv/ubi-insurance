@@ -1,0 +1,67 @@
+{
+  "realm": "ubi",
+  "enabled": true,
+  "registrationAllowed": false,
+  "accessTokenLifespan": 900,
+  "roles": {
+    "realm": [
+      { "name": "policyholder", "description": "Страхователь" },
+      { "name": "adjuster", "description": "Урегулировщик убытков" },
+      { "name": "underwriter", "description": "Андеррайтер: публикация тарифов" },
+      { "name": "admin", "description": "Администратор" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "ubi-dev-client",
+      "name": "Dev client (Postman, curl, будущий SPA)",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": ["http://localhost:*"],
+      "webOrigins": ["+"],
+      "attributes": { "pkce.code.challenge.method": "S256" }
+    },
+    {
+      "clientId": "ubi-service",
+      "name": "Service-to-service (client credentials)",
+      "publicClient": false,
+      "secret": "dev-only-secret",
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false
+    }
+  ],
+  "users": [
+    {
+      "username": "alice",
+      "enabled": true,
+      "email": "alice@ubi.local",
+      "emailVerified": true,
+      "firstName": "Alice",
+      "lastName": "Driver",
+      "credentials": [{ "type": "password", "value": "alice", "temporary": false }],
+      "realmRoles": ["policyholder"]
+    },
+    {
+      "username": "bob",
+      "enabled": true,
+      "email": "bob@ubi.local",
+      "emailVerified": true,
+      "firstName": "Bob",
+      "lastName": "Adjuster",
+      "credentials": [{ "type": "password", "value": "bob", "temporary": false }],
+      "realmRoles": ["adjuster"]
+    },
+    {
+      "username": "carol",
+      "enabled": true,
+      "email": "carol@ubi.local",
+      "emailVerified": true,
+      "firstName": "Carol",
+      "lastName": "Underwriter",
+      "credentials": [{ "type": "password", "value": "carol", "temporary": false }],
+      "realmRoles": ["underwriter"]
+    }
+  ]
+}

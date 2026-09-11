@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: payment-stub
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: 8090

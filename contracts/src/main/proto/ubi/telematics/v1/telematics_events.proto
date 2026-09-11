@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package ubi.telematics.v1;
+
+import "ubi/common/v1/event_metadata.proto";
+
+option java_package = "dev.ubi.contracts.telematics.v1";
+option java_multiple_files = true;
+
+// Интеграционные события телематики. Сырые точки сюда не попадают.
+
+message TripCompleted {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string trip_id = 2;
+  string device_id = 3;
+  string policy_id = 4;
+  double distance_km = 5;
+  int64 duration_s = 6;
+  double night_share = 7;
+}
+
+message DriverScoreChanged {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string policy_id = 2;
+  double score = 3;          // [0, 1], выше — безопаснее
+  string model_version = 4;
+}
+
+message CrashDetected {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string incident_id = 2;
+  string policy_id = 3;
+  double lat = 4;
+  double lon = 5;
+  float peak_decel = 6;
+}

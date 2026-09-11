@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package ubi.common.v1;
+
+option java_package = "dev.ubi.contracts.common.v1";
+option java_multiple_files = true;
+
+// Метаданные, общие для всех интеграционных событий
+message EventMetadata {
+  string event_id = 1;       // UUID, ключ идемпотентности для inbox
+  string occurred_at = 2;    // ISO-8601, бизнес-время
+  string correlation_id = 3; // сквозной id процесса (например, саги)
+  string causation_id = 4;   // id события или команды, которое вызвало это событие
+}

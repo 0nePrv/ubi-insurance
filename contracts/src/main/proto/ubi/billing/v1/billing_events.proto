@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package ubi.billing.v1;
+
+import "ubi/common/v1/event_metadata.proto";
+import "ubi/common/v1/money.proto";
+
+option java_package = "dev.ubi.contracts.billing.v1";
+option java_multiple_files = true;
+
+message InvoiceIssued {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string invoice_id = 2;
+  string policy_id = 3;
+  ubi.common.v1.Money amount = 4;
+}
+
+message PaymentReceived {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string invoice_id = 2;
+  string policy_id = 3;
+}
+
+message PaymentFailed {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string invoice_id = 2;
+  string policy_id = 3;
+  string reason = 4;
+}
+
+message PayoutExecuted {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string payout_id = 2;
+  string claim_id = 3;
+  ubi.common.v1.Money amount = 4;
+}

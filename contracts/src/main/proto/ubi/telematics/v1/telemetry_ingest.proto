@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package ubi.telematics.v1;
+
+option java_package = "dev.ubi.contracts.telematics.v1";
+option java_multiple_files = true;
+
+// Приём телеметрии. Client streaming: устройство держит поток и шлёт пачки точек.
+service TelemetryIngest {
+  rpc StreamTelemetry(stream TelemetryBatch) returns (IngestAck);
+}
+
+message TelemetryBatch {
+  string device_id = 1;
+  uint64 batch_seq = 2;  // монотонный номер пачки на устройстве: дедупликация при переподключении
+  repeated TelemetryPoint points = 3;
+}
+
+message TelemetryPoint {
+  int64 timestamp_ms = 1;
+  double lat = 2;
+  double lon = 3;
+  float speed_kmh = 4;
+  float accel_long = 5;  // продольное ускорение, м/с^2 (торможение < 0)
+  float accel_lat = 6;   // поперечное ускорение, м/с^2
+  bool phone_in_use = 7;
+}
+
+message IngestAck {
+  uint64 last_accepted_seq = 1;
+}

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: vehicle-simulator
+  grpc:
+    client:
+      channels:
+        telematics:
+          address: static://localhost:9083
+
+server:
+  port: 8091
+
+simulator:
+  vehicles: 100            # сколько машин гоняем параллельно
+  points-per-second: 1     # частота точек на одну машину

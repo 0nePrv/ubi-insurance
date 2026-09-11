@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package ubi.claims.v1;
+
+import "ubi/common/v1/event_metadata.proto";
+import "ubi/common/v1/money.proto";
+
+option java_package = "dev.ubi.contracts.claims.v1";
+option java_multiple_files = true;
+
+message ClaimOpened {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string claim_id = 2;
+  string policy_id = 3;
+  string loss_date = 4;
+}
+
+message ClaimAssessed {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string claim_id = 2;
+  ubi.common.v1.Money payout_amount = 3;  // уже за вычетом франшизы
+}
+
+message ClaimClosed {
+  ubi.common.v1.EventMetadata metadata = 1;
+  string claim_id = 2;
+  string outcome = 3;                     // PAID | REJECTED
+}

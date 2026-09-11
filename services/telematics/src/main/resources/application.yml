@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: telematics
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/telematics
+    username: telematics
+    password: telematics
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  kafka:
+    bootstrap-servers: localhost:9092
+    streams:
+      # application-id = consumer group + префикс внутренних топиков Kafka Streams
+      application-id: telematics-trips
+  grpc:
+    server:
+      port: 9083
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/ubi
+
+server:
+  port: 8083
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

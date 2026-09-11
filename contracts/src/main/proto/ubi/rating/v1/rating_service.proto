@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package ubi.rating.v1;
+
+import "ubi/common/v1/money.proto";
+
+option java_package = "dev.ubi.contracts.rating.v1";
+option java_multiple_files = true;
+
+// Синхронный расчёт премии. Вызывается policy при котировке и при корректировке премии.
+service RatingService {
+  rpc CalculatePremium(CalculatePremiumRequest) returns (CalculatePremiumResponse);
+}
+
+message CalculatePremiumRequest {
+  string tariff_code = 1;
+  string effective_date = 2;            // ISO-8601 date: по какой версии тарифа считать
+  Vehicle vehicle = 3;
+  repeated Driver drivers = 4;
+  optional double telematics_score = 5; // [0, 1]; отсутствует, если данных ещё нет
+}
+
+message Vehicle {
+  string vin = 1;
+  int32 power_hp = 2;
+  int32 year = 3;
+  string region_code = 4;
+}
+
+message Driver {
+  int32 age = 1;
+  int32 years_licensed = 2;
+}
+
+message CalculatePremiumResponse {
+  ubi.common.v1.Money annual_premium = 1;
+  string tariff_version = 2;            // фиксируется в котировке и в событиях полиса
+  repeated AppliedFactor factors = 3;   // объяснимость: из чего сложилась цена
+}
+
+message AppliedFactor {
+  string name = 1;
+  double value = 2;
+}

@@ -6,7 +6,7 @@ create table policy_events (
     event_type      text        not null,
     payload         jsonb       not null,                -- внутренние события: jsonb, их удобно читать глазами
     effective_at    timestamptz not null,                -- бизнес-время: когда изменение действует
-    recorded_at     timestamptz not null default now(),  -- системное время: когда мы о нём узнали
+    recorded_at     timestamptz not null,  -- системное время: когда мы о нём узнали
     unique (stream_id, version)                          -- optimistic concurrency: конкурентный append упадёт
 );
 -- ВНИМАНИЕ: не публикуйте события в Kafka, читая эту таблицу по global_position.

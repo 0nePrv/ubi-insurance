@@ -1,5 +1,6 @@
-package dev.ubi.policy.adapter.out.persistence.serde;
+package dev.ubi.policy.adapter.out.serde;
 
+import dev.ubi.policy.adapter.out.persistence.serde.EventSerdeConfiguration;
 import dev.ubi.policy.domain.vo.*;
 import tools.jackson.core.JsonGenerator;
 import tools.jackson.core.JsonParser;

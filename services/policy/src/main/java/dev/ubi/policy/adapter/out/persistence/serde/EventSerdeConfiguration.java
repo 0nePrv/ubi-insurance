@@ -1,5 +1,6 @@
 package dev.ubi.policy.adapter.out.persistence.serde;
 
+import dev.ubi.policy.adapter.out.serde.PolicyDomainModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tools.jackson.databind.DeserializationFeature;

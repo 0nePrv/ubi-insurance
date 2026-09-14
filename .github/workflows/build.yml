@@ -1,4 +1,5 @@
 name: build
+
 on:
   push:
     branches: [master, develop, 'feature/**']
@@ -34,5 +35,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: '**/build/reports/tests'
+          path: '**/build/reports/tests/'
           retention-days: 7

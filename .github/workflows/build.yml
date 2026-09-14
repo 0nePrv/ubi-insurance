@@ -27,7 +27,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: Build and test
-        run: ./gradlew guild --stacktrace
+        run: ./gradlew build --stacktrace
 
       - name: Upload test reports
         if: failure()

@@ -1,3 +1,5 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
 pluginManagement {
     // Конвенции сборки живут в отдельной included build, а не в buildSrc:
     // изменение build-logic не инвалидирует конфигурацию всех проектов разом.
@@ -34,7 +36,7 @@ include(
     // Контракты: protobuf для gRPC и событий Kafka
     ":contracts",
 
-    // Технические библиотеки
+    // Технические библиотеки без доменной логики
     ":libs:messaging",
     ":libs:test-support",
 

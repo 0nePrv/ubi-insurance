@@ -18,7 +18,7 @@ public class ConcurrentPolicyModificationException extends RuntimeException {
         return id;
     }
 
-    public int expectedVersion() {
+    public int conflictingVersion() {
         return conflictingVersion;
     }
 }

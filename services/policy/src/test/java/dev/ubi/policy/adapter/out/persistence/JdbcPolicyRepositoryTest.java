@@ -104,12 +104,7 @@ class JdbcPolicyRepositoryTest {
             .param("id", id.value())
             .query(Integer.class)
             .list();
-        assertThat(versions).doesNotHaveDuplicates().doesNotContainNull();
-        int version = versions.getFirst();
-        for (int i = 1; i < versions.size(); i++) {
-            assertThat(versions.get(i)).isEqualTo(version + 1);
-            version = versions.get(i);
-        }
+        assertThat(versions).containsExactly(1, 2, 3);
     }
 
     private PolicyId givenIssuedPolicy() {

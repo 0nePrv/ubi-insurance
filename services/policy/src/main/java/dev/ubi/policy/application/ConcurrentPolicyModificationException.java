@@ -6,12 +6,12 @@ import org.springframework.dao.DuplicateKeyException;
 public class ConcurrentPolicyModificationException extends RuntimeException {
 
     private final PolicyId id;
-    private final int expectedVersion;
+    private final int conflictingVersion;
 
-    public ConcurrentPolicyModificationException(PolicyId id, int expectedVersion, DuplicateKeyException e) {
-        super("For policy with id %s expected version %s already exists".formatted(id, expectedVersion), e);
+    public ConcurrentPolicyModificationException(PolicyId id, int conflictingVersion, DuplicateKeyException e) {
+        super("For policy with id %s version %s already exists".formatted(id, conflictingVersion), e);
         this.id = id;
-        this.expectedVersion = expectedVersion;
+        this.conflictingVersion = conflictingVersion;
     }
 
     public PolicyId id() {
@@ -19,6 +19,6 @@ public class ConcurrentPolicyModificationException extends RuntimeException {
     }
 
     public int expectedVersion() {
-        return expectedVersion;
+        return conflictingVersion;
     }
 }

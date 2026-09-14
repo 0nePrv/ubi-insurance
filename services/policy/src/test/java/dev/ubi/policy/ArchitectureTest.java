@@ -13,6 +13,7 @@ import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
  * allowEmptyShould и withOptionalLayers нужны, пока пакеты пустые: иначе ArchUnit
  * по умолчанию падает на правилах, под которые не попал ни один класс.
  */
+@SuppressWarnings("unused")
 @AnalyzeClasses(packages = "dev.ubi.policy", importOptions = ImportOption.DoNotIncludeTests.class)
 class ArchitectureTest {
 
@@ -37,4 +38,10 @@ class ArchitectureTest {
             .whereLayer("Adapters").mayNotBeAccessedByAnyLayer()
             .whereLayer("Application").mayOnlyBeAccessedByLayers("Adapters")
             .whereLayer("Domain").mayOnlyBeAccessedByLayers("Application", "Adapters");
+
+    @ArchTest
+    static final ArchRule everyClassBelongsToALayer = classes()
+        .that().resideInAPackage("dev.ubi.policy..")
+        .should().resideInAnyPackage("..domain..", "..application..", "..adapter..", "..config..", "dev.ubi.policy")
+        .allowEmptyShould(true);
 }

@@ -34,7 +34,7 @@ include(
     // Контракты: protobuf для gRPC и событий Kafka
     ":contracts",
 
-    // Технические библиотеки. Доменного кода здесь нет и не будет.
+    // Технические библиотеки
     ":libs:messaging",
     ":libs:test-support",
 

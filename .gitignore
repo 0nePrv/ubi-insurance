@@ -4,7 +4,6 @@ build/
 .kotlin/
 .idea/
 *.iml
-out/
 .DS_Store
 *.log
 .env

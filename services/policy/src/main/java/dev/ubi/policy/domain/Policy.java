@@ -52,6 +52,7 @@ public final class Policy {
 
     /** Число применённых событий. Используется как ожидаемая версия при append в event store. */
     private int version;
+    private int loadedVersion;
 
     private Policy() {
     }
@@ -103,6 +104,7 @@ public final class Policy {
         }
         var policy = new Policy();
         events.forEach(policy::apply);
+        policy.loadedVersion = policy.version;
         return policy;
     }
 
@@ -291,5 +293,9 @@ public final class Policy {
 
     public int version() {
         return version;
+    }
+
+    public int loadedVersion() {
+        return loadedVersion;
     }
 }

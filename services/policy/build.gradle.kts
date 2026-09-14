@@ -21,4 +21,5 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-grpc-client")
 
     testImplementation(projects.libs.testSupport)
+    testImplementation("org.springframework.boot:spring-boot-jdbc-test")
 }
